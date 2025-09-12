@@ -1,13 +1,45 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 import { Formik } from "formik";
-import { Image, ScrollView, StatusBar, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Alert, Image, ScrollView, StatusBar, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { auth, db } from "../../config/firebaseConfig";
 import validationSchema from "../../utils/authSchema";
 
-const signin = () => {
+const SignIn = () => {
     const router = useRouter()
-    const handleSignup = () => {
+    const handleSignup = async (values) => {
+        try {
+            const userCredentail = await signInWithEmailAndPassword(auth, values.email, values.password)
+            const user = userCredentail.user
 
+            const userDoc = await getDoc(doc(db, 'users', user.uid))
+
+            if (userDoc.exists()) {
+                await AsyncStorage.setItem('userEmail', values.email)
+                router.push('/home')
+            }else{
+                console.log('No such Doc')
+            }
+
+        } catch (error) {
+            if (error.code === 'auth/invalid-credential') {
+                Alert.alert(
+                    'Signup Failed!',
+                    'Incorrect credentials. Please try again.',
+                    [{ text: 'Ok' }]
+                )
+            }
+            else {
+                Alert.alert(
+                    'Signup Error',
+                    'An unexpected error occured. Please try again later.',
+                    [{ text: 'Ok' }]
+                )
+            }
+        }
     }
 
     return (
@@ -68,4 +100,4 @@ const signin = () => {
     )
 }
 
-export default signin
+export default SignIn

@@ -1,16 +1,47 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 import { Formik } from "formik";
-import { Image, ScrollView, StatusBar, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Alert, Image, ScrollView, StatusBar, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { auth, db } from "../../config/firebaseConfig";
 import validationSchema from "../../utils/authSchema";
 
 
-const signup = () => {
+const SignUp = () => {
 
     const router = useRouter();
 
-    const handleSignup = () => {
+    const handleSignup = async (values) => {
+        try {
+            const userCredentail = await createUserWithEmailAndPassword(auth, values.email, values.password)
+            const user = userCredentail.user
 
+            await setDoc(doc(db, 'users', user.uid), {
+                email: values.email,
+                createdAt: new Date()
+            })
+
+            await AsyncStorage.setItem('userEmail', values.email)
+            router.push('/home')
+
+        } catch (error) {
+            if (error.code === 'auth/email-already-in-use') {
+                Alert.alert(
+                    'Signup Failed!',
+                    'This Email Address is already in use. Please use a different email.',
+                    [{ text: 'Ok' }]
+                )
+            }
+            else {
+                Alert.alert(
+                    'Signup Error',
+                    'An unexpected error occured. Please try again later.',
+                    [{ text: 'Ok' }]
+                )
+            }
+        }
     }
 
     return (
@@ -85,4 +116,4 @@ const signup = () => {
     )
 }
 
-export default signup
+export default SignUp

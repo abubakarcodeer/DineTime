@@ -7,7 +7,7 @@ export default function TabsLayout() {
     tabBarStyle:{
       backgroundColor:Colors.SECONDARY,
       paddingBottom:14,
-      height:75
+      height:65
     },
     tabBarLabelStyle:{fontSize:12,fontWeight:'bold'}
   }}>

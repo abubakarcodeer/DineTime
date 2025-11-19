@@ -13,6 +13,11 @@ const SignUp = () => {
 
     const router = useRouter();
 
+    const handleGuest = async () => {
+        await AsyncStorage.setItem('isGuest', 'true')
+        router.push('/home')
+    }
+
     const handleSignup = async (values) => {
         try {
             const userCredentail = await createUserWithEmailAndPassword(auth, values.email, values.password)
@@ -23,8 +28,9 @@ const SignUp = () => {
                 createdAt: new Date()
             })
 
+            await AsyncStorage.setItem('isGuest','false')
             await AsyncStorage.setItem('userEmail', values.email)
-            router.push('/home')
+            router.replace('/home')
 
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {
@@ -96,7 +102,7 @@ const SignUp = () => {
 
                         <View className="flex-row justify-center p-2">
                             <Text className="text-white font-semibold">Be a </Text>
-                            <TouchableOpacity onPress={() => router.push('/home')}>
+                            <TouchableOpacity onPress={handleGuest}>
                                 <Text className="text-base font-semibold underline text-[#f49b33]">Guest User</Text>
                             </TouchableOpacity>
                         </View>

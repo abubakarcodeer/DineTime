@@ -18,8 +18,9 @@ const SignIn = () => {
             const userDoc = await getDoc(doc(db, 'users', user.uid))
 
             if (userDoc.exists()) {
+                await AsyncStorage.setItem('isGuest','false')
                 await AsyncStorage.setItem('userEmail', values.email)
-                router.push('/home')
+                router.replace('/home')
             }else{
                 console.log('No such Doc')
             }

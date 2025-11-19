@@ -1,9 +1,15 @@
+import AsynStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from "expo-router";
 import { Image, ScrollView, StatusBar, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
   const router = useRouter()
+
+  const handleGuest = async()=>{
+    await AsynStorage.setItem('isGuest', 'true')
+    router.push('/home')
+  }
   return (
     <SafeAreaView className="bg-[#2b2b2b] flex-1">
       <StatusBar barStyle={'light-content'} backgroundColor={'#2b2b2b'} />
@@ -19,7 +25,7 @@ export default function Index() {
             <TouchableOpacity onPress={()=>router.push('/signup')} className="p-2 my-2 bg-[#f49b33] text-black rounded-lg max-w-fit">
               <Text className="text-lg font-semibold text-center">Sign Up</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={()=>router.push('/home')} className="p-2 my-2  text-black border-[#f49b33] border rounded-lg max-w-fit">
+            <TouchableOpacity onPress={handleGuest} className="p-2 my-2  text-black border-[#f49b33] border rounded-lg max-w-fit">
               <Text className="text-lg text-[#f49b33] font-semibold text-center">Guest User</Text>
             </TouchableOpacity>
           </View>

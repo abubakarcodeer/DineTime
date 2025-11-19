@@ -196,7 +196,7 @@ const Restaurant = () => {
                 </View>
 
                 <View  className='flex-1'>
-                    <FindSlots date={date} selectedNumber={selectedNumber} slots={slotsData} selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot}/>
+                    <FindSlots restaurant={restaurant} date={date} selectedNumber={selectedNumber} slots={slotsData} selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot}/>
                 </View>
 
             </ScrollView>

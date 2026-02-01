@@ -1,50 +1,59 @@
-# Welcome to your Expo app 👋
+# DineTime – Restaurant Table Booking App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+DineTime is a **restaurant table booking web application** built using **React**, **Yup**, and **Firebase**.  
+The app allows users to book tables by selecting a date and available time slot, place their order, and manage bookings through a basic profile section. Users can also continue using the app with a **Guest Login** option.
 
-## Get started
+## 🌟 Features
 
-1. Install dependencies
+- 🔐 **Authentication**
+  - Login & Signup system
+  - **Guest login option** (use app without full signup)
 
-   ```bash
-   npm install
-   ```
+- 📅 **Date Picker**
+  - Select booking date easily
 
-2. Start the app
+- ⏰ **Available Time Slots**
+  - Shows available table slots based on selected date
 
-   ```bash
-   npx expo start
-   ```
+- 🪑 **Table Booking System**
+  - Book tables and store data using **Firebase**
 
-In the output, you'll find options to open the app in a
+- 📝 **Form Validation**
+  - Schema-based validation using **Yup**
+  - Prevents invalid form submission
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- 👤 **Profile Section**
+  - View logged-in user email
+  - Logout functionality
+  - View **booking history**
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- 📦 **Order Placement**
+  - Complete booking after selecting date & time slot
 
-## Get a fresh project
+- ☁️ **Firebase Integration**
+  - Stores bookings and user data in real time
 
-When you're ready, run:
+## 🧱 Technologies Used
 
+- **React** – Frontend UI
+- **Yup** – Form schema validation
+- **Firebase** – Authentication & database
+- **JavaScript (ES6)** – Logic handling
+- **CSS** – Styling
+- **Date Picker** – Booking date selection
+
+## 🧠 How It Works
+
+1. User logs in/Sign up or continues as **Guest**
+2. Booking form is validated using **Yup**
+3. User selects a date via date picker
+4. Available time slots are displayed
+5. User selects a time slot and places an order
+6. Booking data is stored in **Firebase**
+7. User can view booking details in **Booking History**
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
 ```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+git clone https://github.com/abubakarcodeer/DineTime.git
